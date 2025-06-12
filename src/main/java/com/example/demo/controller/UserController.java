@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.DTO.UpdateRequest;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,12 +34,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user){
-        return userService.update(id, user);
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UpdateRequest user){
+        return ResponseEntity.ok(userService.update(id,user));
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id){
-        userService.delete(id);
+        userService.deleteById(id);
     }
 }
